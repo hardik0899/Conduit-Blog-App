@@ -43,5 +43,6 @@ Credits have to go out to Thinkster with their awesome RealWorld
 
 This project is licensed under the MIT license.
 
-Disclaimer
-This source and the whole package comes without warranty. It may or may not harm your computer or cell phone. Please use with care. Any damage cannot be related back to the author. The source has been tested on a virtual environment and scanned for viruses and has passed all tests.
+Link for the sample app - https://drive.google.com/file/u/1/d/1G8O50FJcVUK4wCx0QZdQ-j1gBjyPJGWY/view?usp=sharing
+
+Basically this android app is a clone version of this website - https://demo.realworld.io/#/

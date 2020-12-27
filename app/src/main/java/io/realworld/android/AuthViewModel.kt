@@ -9,10 +9,14 @@ import io.realworld.api.models.entities.User
 import kotlinx.coroutines.launch
 
 class AuthViewModel : ViewModel() {
-
     private val _user = MutableLiveData<User?>()
-
     val user : LiveData<User?> = _user
+
+    fun getCurrentUser(token: String) = viewModelScope.launch {
+        UserRepo.getCurrentUser(token)?.let {
+            _user.postValue(it)
+        }
+    }
 
     fun login(email : String, password : String) = viewModelScope.launch {
             UserRepo.login(email, password)?.let {
@@ -26,6 +30,10 @@ class AuthViewModel : ViewModel() {
         }
     }
 
+    fun logout() {
+        _user.postValue(null)
+    }
+
     fun update(
         bio: String?,
         username: String?,
@@ -37,5 +45,4 @@ class AuthViewModel : ViewModel() {
             _user.postValue(it)
         }
     }
-
 }

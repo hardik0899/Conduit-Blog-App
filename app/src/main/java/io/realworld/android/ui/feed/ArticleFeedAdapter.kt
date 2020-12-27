@@ -1,21 +1,17 @@
 package io.realworld.android.ui.feed
 
-import android.annotation.SuppressLint
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import io.realworld.android.R
 import io.realworld.android.databinding.ListItemArticleBinding
+import io.realworld.android.extensions.loadImage
+import io.realworld.android.extensions.timeStamp
 import io.realworld.api.models.entities.Article
 
-class ArticleFeedAdapter : ListAdapter<Article,ArticleFeedAdapter.ArticleViewHolder>(
+class ArticleFeedAdapter(val onArticleClicked: (slug: String) -> Unit) : ListAdapter<Article,ArticleFeedAdapter.ArticleViewHolder>(
     object : DiffUtil.ItemCallback<Article>() {
         override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
             return oldItem == newItem
@@ -39,8 +35,10 @@ class ArticleFeedAdapter : ListAdapter<Article,ArticleFeedAdapter.ArticleViewHol
             authorTextView.text = article.author.username
             titleTextView.text = article.title
             bodySnippetTextView.text = article.body
-            dateTextView.text = "Dec 15, 2020"
-            avatarImageView.background = ColorDrawable(Color.GRAY)
+            dateTextView.timeStamp = article.createdAt
+            avatarImageView.loadImage(article.author.image, true)
+
+            root.setOnClickListener { onArticleClicked(article.slug) }
         }
     }
 }

@@ -30,7 +30,7 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         _binding?.apply {
-            loginButton.setOnClickListener {
+            submitButton.setOnClickListener {
                 authViewModel.login(
                     emailEditText.text.toString(),
                     passwordEditText.text.toString()
